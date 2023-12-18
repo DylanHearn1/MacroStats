@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
-import MainSection from './Components/Main/Main';
-import { DataProps } from './Components/Main/Main';
+import MainSection from './Components/Main/MainContent';
+import { DataProps } from './Components/Main/MainContent';
 
 function App() {
   const [data, setData] = useState<DataProps[]>([]);
@@ -15,16 +15,31 @@ function App() {
     },
   };
 
+  const randomKey = () => {
+    return Math.random().toString(36).substr(2, 8);
+  };
+
   async function getResults() {
+    setSearch('');
     try {
       const responce = await fetch(URL, options);
       const results = await responce.json();
+      // create an id for item searched
+      const newItem = {
+        ...results.items[0],
+        id: randomKey(),
+      };
       // results.items[0] otherwise user could enter multiple food for one search
-      setData((prevData) => [...prevData, results.items[0]]);
+      setData((prevData) => [...prevData, newItem]);
     } catch (error) {
       console.log(error + 'error on the server');
     }
   }
+
+  const removeItem = (id: string) => {
+    const filteredData = data.filter((item) => item.id !== id);
+    setData(filteredData);
+  };
 
   return (
     <>
@@ -34,10 +49,11 @@ function App() {
           type="text"
           placeholder="search"
           onChange={(e) => setSearch(e.target.value)}
+          value={search}
         />
         <button onClick={getResults}>Search</button>
         <button onClick={() => console.log(data)}>check</button>
-        <MainSection data={data} />
+        <MainSection data={data} removeItem={removeItem} />
       </div>
     </>
   );
