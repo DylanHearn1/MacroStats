@@ -1,18 +1,30 @@
 import './App.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MainSection from './Components/Main/MainContent';
-import { DataProps } from './Components/Main/MainContent';
-import DataComponent from './Components/DataVisual/Data';
-import ProgressUpdate from './Components/Update/Progress';
+import ProgressUpdate from './Components/UpdateBars/Progress';
+import AddItem from './Components/AddItem';
 // import Nav from './Components/NavBar/Nav';
+
+export interface Data {
+  data: Array<DataProps>;
+  removeItem: (key: string) => void;
+}
+
+export interface DataProps {
+  name: string;
+  serving_size_g: number;
+  calories: number;
+  protein_g: number;
+  fat_total_g: number;
+  carbohydrates_total_g: number;
+  id: string;
+}
 
 function App() {
   const [data, setData] = useState<DataProps[]>([]);
-  const [search, setSearch] = useState('');
-  const [amount, setAmount] = useState('');
-  const [weightValue, setWeightValue] = useState('gram');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const URL = `https://api.calorieninjas.com/v1/nutrition?query=${amount} ${weightValue} ${search}`;
+  const URL = `https://api.calorieninjas.com/v1/nutrition?query=${searchQuery}`;
   const options = {
     method: 'GET',
     headers: {
@@ -23,79 +35,49 @@ function App() {
   const randomKey = () => {
     return Math.random().toString(36).slice(2, 8);
   };
-  async function getResults() {
-    setSearch('');
-    setAmount('');
-    try {
-      const responce = await fetch(URL, options);
-      const results = await responce.json();
-      if (results.items.length > 0) {
-        const newItem = {
-          ...results.items[0],
-          id: randomKey(),
-        };
-        setData((prevData) => [...prevData, newItem]);
+
+  useEffect(() => {
+    async function getResults() {
+      try {
+        const responce = await fetch(URL, options);
+        const results = await responce.json();
+        if (results.items.length > 0) {
+          const newItem = {
+            ...results.items[0],
+            id: randomKey(),
+          };
+          setData((prevData) => [...prevData, newItem]);
+        }
+      } catch (error) {
+        console.log(error + 'error on the server');
       }
-      console.log(data);
-    } catch (error) {
-      console.log(error + 'error on the server');
     }
-  }
+    getResults();
+  }, [searchQuery]);
+
   const removeItem = (id: string) => {
     const filteredData = data.filter((item) => item.id !== id);
     setData(filteredData);
   };
 
+  const takeQuery = (amount: string, value: string, search: string) => {
+    setSearchQuery(`${amount} ${value} ${search}`);
+  };
+
   return (
     <>
-      <div id="container" className="h-screen">
-        <div className="grid md:grid-cols-3 gap-1 h-full">
-          <section className="col-span-2 h-full bg-slate-200 px-3 overflow-auto">
-            <div className="grid grid-cols-4 my-5">
-              <input
-                className="p-1 rounded-full mx-2"
-                type="text"
-                placeholder="Item"
-                onChange={(e) => setSearch(e.target.value)}
-                value={search}
-              />
-              <input
-                className="p-1 rounded-full mx-2"
-                type="number"
-                placeholder="Amount"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-              />
-              <select
-                name=""
-                className="p-1 rounded-full mx-2"
-                onChange={(e) => setWeightValue(e.target.value)}
-              >
-                <option value="gram">Grams (g)</option>
-                <option value="kilogram">Kilograms (kgs)</option>
-                <option value="lbs">Pounds (lbs)</option>
-              </select>
-              <button
-                onClick={getResults}
-                className="bg-green-400 rounded-full mx-2"
-              >
-                Search
-              </button>
-              <button onClick={() => console.log(data)}>test</button>
-            </div>
+      <div className="md:h-screen bg-slate-200 p-8">
+        <div className="flex justify-center my-5">
+          <AddItem onSubmit={takeQuery} />
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 h-5/6">
+          <section className="col-span-2 overflow-auto">
             {data.length > 0 && (
-              <div className="bg-slate-200">
-                <MainSection data={data} removeItem={removeItem} />
-              </div>
+              <MainSection data={data} removeItem={removeItem} />
             )}
           </section>
-          <section className="h-full grid grid-row-6 gap-1">
-            <div className="bg-slate-200 row-span-1">
-              <DataComponent />
-            </div>
-            <div className="bg-slate-200 row-span-5">
-              <ProgressUpdate />
-            </div>
+          <section className="bg-white rounded-xl p-5">
+            <ProgressUpdate data={data} removeItem={removeItem} />
           </section>
         </div>
       </div>

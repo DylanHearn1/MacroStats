@@ -4,7 +4,8 @@ export default {
     "index.html",
     "./src/App.tsx",
     "./src/Components/Main/MainContent.tsx",
-    "./src/Components/NavBar/Nav.tsx"
+    "./src/Components/NavBar/Nav.tsx",
+    "./src/Components/Additem.tsx"
   ],
   theme: {
     extend: {},
