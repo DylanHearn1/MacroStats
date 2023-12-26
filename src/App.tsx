@@ -1,5 +1,5 @@
 import './App.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import MainSection from './Components/Main/MainContent';
 import ProgressUpdate from './Components/UpdateBars/Progress';
 import AddItem from './Components/AddItem';
@@ -15,11 +15,15 @@ export interface Item {
   id: string;
 }
 
+export interface ItemSearchParams {
+  amount: string,
+  unit: 'grams' | 'kilograms' | 'lbs',
+  name: string
+}
+
 function App() {
   const [items, setItems] = useState<Item[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
 
-  const URL = `https://api.calorieninjas.com/v1/nutrition?query=${searchQuery}`;
   const options = {
     method: 'GET',
     headers: {
@@ -31,39 +35,34 @@ function App() {
     return Math.random().toString(36).slice(2, 8);
   };
 
-  useEffect(() => {
-    async function getResults() {
-      try {
-        const responce = await fetch(URL, options);
-        const results = await responce.json();
-        if (results.items.length > 0) {
-          const newItem = {
-            ...results.items[0],
-            id: randomKey(),
-          };
-          setItems((prevData) => [...prevData, newItem]);
-        }
-      } catch (error) {
-        console.log(error + 'error on the server');
-      }
-    }
-    getResults();
-  }, [searchQuery]);
-
   const removeItem = (id: string) => {
     const filteredData = items.filter((item) => item.id !== id);
     setItems(filteredData);
   };
 
-  const takeQuery = (amount: string, value: string, search: string) => {
-    setSearchQuery(`${amount} ${value} ${search}`);
-  };
+  async function getResults({amount, unit, name}: ItemSearchParams) {
+    const Url = `https://api.calorieninjas.com/v1/nutrition?query=${amount} ${unit} ${name}`
+
+    try {
+      const responce = await fetch(Url, options);
+      const results = await responce.json();
+      if (results.items.length > 0) {
+        const newItem = {
+          ...results.items[0],
+          id: randomKey(),
+        };
+        setItems((prevData) => [...prevData, newItem]);
+      }
+    } catch (error) {
+      console.log(error + 'error on the server');
+    }
+  }
 
   return (
     <>
       <div className="md:h-screen bg-slate-200 p-8">
         <div className="flex justify-center my-5">
-          <AddItem onSubmit={takeQuery} />
+          <AddItem onSubmit={getResults} />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 h-5/6">
           <section className="col-span-2 overflow-auto">
@@ -72,7 +71,7 @@ function App() {
             )}
           </section>
           <section className="bg-white rounded-xl p-5">
-            <ProgressUpdate data={items} removeItem={removeItem} />
+            <ProgressUpdate items={items} />
           </section>
         </div>
       </div>

@@ -1,16 +1,18 @@
 import { useState } from 'react';
 
-interface Search {
-  onSubmit: (item: string, weight: string, value: string) => void;
+import { ItemSearchParams } from '../App';
+
+interface AddItemProps {
+  onSubmit: (data: ItemSearchParams) => void;
 }
 
-const AddItem: React.FC<Search> = ({ onSubmit }) => {
-  const [search, setSearch] = useState('');
+const AddItem: React.FC<AddItemProps> = ({ onSubmit }) => {
+  const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
-  const [weightValue, setWeightValue] = useState('grams');
+  const [unit, setUnit] = useState<ItemSearchParams['unit']>('grams');
 
   const handleSubmit = () => {
-    onSubmit(amount, weightValue, search);
+    onSubmit({amount: amount, unit: unit, name: name});
   };
 
   return (
@@ -19,8 +21,8 @@ const AddItem: React.FC<Search> = ({ onSubmit }) => {
         className="p-2 rounded-xl w-44 md:w-80 sm:mr-5 mb-3 lg:mb-0 text-center"
         type="text"
         placeholder="Item"
-        onChange={(e) => setSearch(e.target.value)}
-        value={search}
+        onChange={(e) => setName(e.target.value)}
+        value={name}
       />
       <input
         className="p-2 rounded-xl w-44 sm:mr-5 mb-3 lg:mb-0 text-center"
@@ -32,7 +34,7 @@ const AddItem: React.FC<Search> = ({ onSubmit }) => {
       <select
         name=""
         className="p-2 rounded-xl w-44 sm:mr-5 mb-3 lg:mb-0 text-center"
-        onChange={(e) => setWeightValue(e.target.value)}
+        onChange={(e) => setUnit(e.target.value as ItemSearchParams['unit'])}
       >
         <option value="grams">Grams</option>
         <option value="kilograms">Kilograms</option>

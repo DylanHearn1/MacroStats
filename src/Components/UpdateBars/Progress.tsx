@@ -1,19 +1,22 @@
-import { Data } from '../../App';
+import { Item } from '../../App';
 
-const ProgressUpdate: React.FC<Data> = ({ data }) => {
-  const calorieSum = data.reduce((acc, cur) => {
-    return acc + cur.calories;
-  }, 0);
+interface ProgressUpdateProps {
+  items: Item[]
+}
 
-  const proteinSum = data.reduce((acc, cur) => {
-    return acc + cur.protein_g;
-  }, 0);
+const ProgressUpdate = ({ items }: ProgressUpdateProps) => {
+  const reduceItemsProperty = (property: string) => {
+    return items.reduce((acc, cur) => acc + cur[property], 0)
+  }
 
   return (
     <div>
       <h1>Current Progress</h1>
-      {calorieSum}
-      {proteinSum}
+      <ul>
+        <li>{reduceItemsProperty('calories')}</li>
+        <li>{reduceItemsProperty('protein_g')}</li>
+        <li>{reduceItemsProperty('carbohydrates_total_g')}</li>
+      </ul>
     </div>
   );
 };
