@@ -1,10 +1,15 @@
-import { Data } from '../../App';
+import { Item } from '../../App';
 
-const MainSection: React.FC<Data> = ({ data, removeItem }) => {
+interface MainSectionProps {
+  items: Item[],
+  removeItem: (id: string) => void
+}
+
+const MainSection = ({ items, removeItem }: MainSectionProps) => {
   return (
     <div className="flex flex-col-reverse">
-      {data.length &&
-        data.map((item) => (
+      {items.length &&
+        items.map((item) => (
           <div
             key={item.id}
             className="md:grid md:grid-cols-7 p-3 bg-white rounded-xl md:rounded-xl my-2 text-center"
