@@ -6,8 +6,12 @@ const ProgressUpdate: React.FC<Data> = ({ data }) => {
   }, 0);
 
   const proteinSum = data.reduce((acc, cur) => {
-    return acc + cur.protein_g;
+    return Math.floor(acc + cur.protein_g);
   }, 0);
+
+  data.map((macro) => {
+    return macro;
+  });
 
   return (
     <div>

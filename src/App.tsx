@@ -1,16 +1,11 @@
 import './App.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import MainSection from './Components/Main/MainContent';
 import ProgressUpdate from './Components/UpdateBars/Progress';
 import AddItem from './Components/AddItem';
 // import Nav from './Components/NavBar/Nav';
 
-export interface Data {
-  data: Array<DataProps>;
-  removeItem: (key: string) => void;
-}
-
-export interface DataProps {
+export interface Macros {
   name: string;
   serving_size_g: number;
   calories: number;
@@ -20,66 +15,62 @@ export interface DataProps {
   id: string;
 }
 
-function App() {
-  const [data, setData] = useState<DataProps[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+export interface SearchParams {
+  unit: string;
+  weight: string;
+  item: string;
+}
 
-  const URL = `https://api.calorieninjas.com/v1/nutrition?query=${searchQuery}`;
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-Api-Key': import.meta.env.VITE_MACRO_API_KEY,
-    },
-  };
+function App() {
+  const [data, setData] = useState<Macros[]>([]);
+
+  async function retreiveSearch({ weight, unit, item }: SearchParams) {
+    const URL = `https://api.calorieninjas.com/v1/nutrition?query=${weight} ${unit} ${item}`;
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-Api-Key': import.meta.env.VITE_MACRO_API_KEY,
+      },
+    };
+
+    try {
+      const responce = await fetch(URL, options);
+      const results = await responce.json();
+      if (results.items.length > 0) {
+        const newItem = {
+          ...results.items[0],
+          id: randomKey(),
+        };
+        setData((prevData) => [...prevData, newItem]);
+      }
+    } catch (error) {
+      console.log(error + 'error on the server');
+    }
+  }
 
   const randomKey = () => {
     return Math.random().toString(36).slice(2, 8);
   };
-
-  useEffect(() => {
-    async function getResults() {
-      try {
-        const responce = await fetch(URL, options);
-        const results = await responce.json();
-        if (results.items.length > 0) {
-          const newItem = {
-            ...results.items[0],
-            id: randomKey(),
-          };
-          setData((prevData) => [...prevData, newItem]);
-        }
-      } catch (error) {
-        console.log(error + 'error on the server');
-      }
-    }
-    getResults();
-  }, [searchQuery]);
 
   const removeItem = (id: string) => {
     const filteredData = data.filter((item) => item.id !== id);
     setData(filteredData);
   };
 
-  const takeQuery = (amount: string, value: string, search: string) => {
-    setSearchQuery(`${amount} ${value} ${search}`);
-  };
-
   return (
     <>
-      <div className="md:h-screen bg-slate-200 p-8">
-        <div className="flex justify-center my-5">
-          <AddItem onSubmit={takeQuery} />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 h-5/6">
-          <section className="col-span-2 overflow-auto">
+      <div className="md:h-screen bg-slate-200 sm:p-8 md:grid grid-cols-2 gap-7">
+        <div className="flex flex-col overflow-auto px-2">
+          <AddItem onSubmit={retreiveSearch} />
+          <section className="col-span-2">
             {data.length > 0 && (
-              <MainSection data={data} removeItem={removeItem} />
+              <MainSection Items={data} removeItem={removeItem} />
             )}
           </section>
-          <section className="bg-white rounded-xl p-5">
-            <ProgressUpdate data={data} removeItem={removeItem} />
-          </section>
         </div>
+        <section className="bg-white rounded-3xl">
+          <ProgressUpdate data={data} />
+        </section>
       </div>
     </>
   );

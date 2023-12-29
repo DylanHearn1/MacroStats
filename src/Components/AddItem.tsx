@@ -1,29 +1,32 @@
 import { useState } from 'react';
+import { SearchParams } from '../App';
 
-interface Search {
-  onSubmit: (item: string, weight: string, value: string) => void;
+export interface Search {
+  onSubmit: (params: SearchParams) => void;
 }
 
-const AddItem: React.FC<Search> = ({ onSubmit }) => {
+const AddItem = ({ onSubmit }: Search) => {
   const [search, setSearch] = useState('');
   const [amount, setAmount] = useState('');
   const [weightValue, setWeightValue] = useState('grams');
 
   const handleSubmit = () => {
-    onSubmit(amount, weightValue, search);
+    onSubmit({ weight: amount, unit: weightValue, item: search });
+    setSearch('');
+    setAmount('');
   };
 
   return (
-    <div className="flex flex-col md:flex-row mb-5">
+    <div className="flex flex-col md:grid md:grid-cols-4 mb-5 gap-4">
       <input
-        className="p-2 rounded-xl w-44 md:w-80 sm:mr-5 mb-3 lg:mb-0 text-center"
+        className="p-2 rounded-2xl mb-3 lg:mb-0 text-center col-span-4 bg-white-200 outline-none"
         type="text"
         placeholder="Item"
         onChange={(e) => setSearch(e.target.value)}
         value={search}
       />
       <input
-        className="p-2 rounded-xl w-44 sm:mr-5 mb-3 lg:mb-0 text-center"
+        className="p-2 rounded-2xl  mb-3 lg:mb-0 text-center"
         type="number"
         placeholder="Amount"
         value={amount}
@@ -31,7 +34,7 @@ const AddItem: React.FC<Search> = ({ onSubmit }) => {
       />
       <select
         name=""
-        className="p-2 rounded-xl w-44 sm:mr-5 mb-3 lg:mb-0 text-center"
+        className="p-2 rounded-2xl mb-3 lg:mb-0 text-center"
         onChange={(e) => setWeightValue(e.target.value)}
       >
         <option value="grams">Grams</option>
@@ -40,7 +43,7 @@ const AddItem: React.FC<Search> = ({ onSubmit }) => {
       </select>
       <button
         onClick={handleSubmit}
-        className="bg-sky-500 rounded-xl w-44 text-white p-2 sm:mr-3 mb-5 lg:mb-0"
+        className="bg-sky-500 rounded-2xl text-white p-2 mb-5 lg:mb-0 col-span-2 hover:bg-sky-400"
       >
         Add Item
       </button>
