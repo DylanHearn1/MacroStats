@@ -1,23 +1,25 @@
-import { Data } from '../../App';
+import { Macros } from '../../App';
+import ProgressBar from './ProgressBar';
 
-const ProgressUpdate: React.FC<Data> = ({ data }) => {
-  const calorieSum = data.reduce((acc, cur) => {
-    return acc + cur.calories;
-  }, 0);
+interface ProgressProps {
+  items: Array<Macros>;
+}
 
-  const proteinSum = data.reduce((acc, cur) => {
-    return Math.floor(acc + cur.protein_g);
-  }, 0);
-
-  data.map((macro) => {
-    return macro;
-  });
+const ProgressUpdate = ({ items }: ProgressProps) => {
+  function calculateTotal(amount: keyof Macros) {
+    return Math.floor(items.reduce((acc, cur) => acc + Number(cur[amount]), 0));
+  }
 
   return (
-    <div>
+    <div className="p-2">
       <h1>Current Progress</h1>
-      {calorieSum}
-      {proteinSum}
+      <ProgressBar amount={calculateTotal('calories')} macroType="calories" />
+      <ProgressBar amount={calculateTotal('protein_g')} macroType="protein" />
+      <ProgressBar amount={calculateTotal('fat_total_g')} macroType="fats" />
+      <ProgressBar
+        amount={calculateTotal('carbohydrates_total_g')}
+        macroType="carbs"
+      />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { Macros } from '../../App';
 
-interface FoodItems {
+export interface FoodItems {
   Items: Array<Macros>;
   removeItem: (id: string) => void;
 }

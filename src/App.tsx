@@ -22,7 +22,7 @@ export interface SearchParams {
 }
 
 function App() {
-  const [data, setData] = useState<Macros[]>([]);
+  const [items, setItems] = useState<Macros[]>([]);
 
   async function retreiveSearch({ weight, unit, item }: SearchParams) {
     const URL = `https://api.calorieninjas.com/v1/nutrition?query=${weight} ${unit} ${item}`;
@@ -41,7 +41,7 @@ function App() {
           ...results.items[0],
           id: randomKey(),
         };
-        setData((prevData) => [...prevData, newItem]);
+        setItems((prevItems) => [...prevItems, newItem]);
       }
     } catch (error) {
       console.log(error + 'error on the server');
@@ -53,8 +53,8 @@ function App() {
   };
 
   const removeItem = (id: string) => {
-    const filteredData = data.filter((item) => item.id !== id);
-    setData(filteredData);
+    const filteredItems = items.filter((item) => item.id !== id);
+    setItems(filteredItems);
   };
 
   return (
@@ -63,13 +63,13 @@ function App() {
         <div className="flex flex-col overflow-auto px-2">
           <AddItem onSubmit={retreiveSearch} />
           <section className="col-span-2">
-            {data.length > 0 && (
-              <MainSection Items={data} removeItem={removeItem} />
+            {items.length > 0 && (
+              <MainSection Items={items} removeItem={removeItem} />
             )}
           </section>
         </div>
         <section className="bg-white rounded-3xl">
-          <ProgressUpdate data={data} />
+          <ProgressUpdate items={items} />
         </section>
       </div>
     </>
