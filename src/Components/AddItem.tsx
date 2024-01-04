@@ -21,14 +21,16 @@ const AddItem = ({ onSubmit }: Search) => {
       <input
         className="p-2 rounded-2xl mb-3 lg:mb-0 text-center col-span-4 bg-white-200 outline-none"
         type="text"
+        id="foodInput"
         placeholder="Item"
         onChange={(e) => setSearch(e.target.value)}
         value={search}
       />
       <input
-        className="p-2 rounded-2xl  mb-3 lg:mb-0 text-center"
+        className="p-2 rounded-2xl mb-3 lg:mb-0 text-center"
         type="number"
         placeholder="Amount"
+        id="foodAmountInput"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
@@ -36,6 +38,7 @@ const AddItem = ({ onSubmit }: Search) => {
         name=""
         className="p-2 rounded-2xl mb-3 lg:mb-0 text-center"
         onChange={(e) => setWeightValue(e.target.value)}
+        id="unitInput"
       >
         <option value="grams">Grams</option>
         <option value="kilograms">Kilograms</option>
