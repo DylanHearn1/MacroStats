@@ -12,7 +12,7 @@ const ProgressBar = ({ amount, goal }: ProgressProps) => {
       <div className="bg-slate-300 rounded-full w-full overflow-hidden">
         <div
           className={
-            percentage > 100
+            percentage >= 100
               ? `bg-green-400 ${progressStyles}`
               : `bg-sky-400 ${progressStyles}`
           }

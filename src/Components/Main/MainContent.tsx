@@ -7,7 +7,7 @@ export interface FoodItems {
 
 const MainSection = ({ Items, removeItem }: FoodItems) => {
   return (
-    <div className="flex flex-col-reverse">
+    <div className="flex flex-col-reverse m-5">
       {Items.length &&
         Items.map((item) => (
           <div

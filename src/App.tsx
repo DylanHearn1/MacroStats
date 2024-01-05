@@ -52,6 +52,27 @@ function App() {
     return Math.random().toString(36).slice(2, 8);
   };
 
+  const addCustomItem = ({
+    name,
+    serving_size_g,
+    calories,
+    protein_g,
+    fat_total_g,
+    carbohydrates_total_g,
+  }: Macros) => {
+    const customItem = {
+      name: name,
+      serving_size_g: serving_size_g,
+      calories: calories,
+      protein_g: protein_g,
+      fat_total_g: fat_total_g,
+      carbohydrates_total_g: carbohydrates_total_g,
+      id: randomKey(),
+    };
+
+    setItems((prevItems) => [...prevItems, customItem]);
+  };
+
   const removeItem = (id: string) => {
     const filteredItems = items.filter((item) => item.id !== id);
     setItems(filteredItems);
@@ -59,16 +80,16 @@ function App() {
 
   return (
     <>
-      <div className="md:h-screen bg-slate-200 sm:p-8 md:grid grid-cols-2 gap-7">
-        <div className="flex flex-col overflow-auto px-2">
-          <AddItem onSubmit={retreiveSearch} />
+      <div className="md:h-screen bg-slate-200 md:grid grid-cols-2">
+        <div className="flex flex-col overflow-auto">
+          <AddItem onSubmit={retreiveSearch} onSubmitCustom={addCustomItem} />
           <section className="col-span-2">
             {items.length > 0 && (
               <MainSection Items={items} removeItem={removeItem} />
             )}
           </section>
         </div>
-        <section className="bg-white rounded-3xl">
+        <section className="bg-white rounded-3xl m-5 custom-box-shadow">
           <ProgressUpdate items={items} />
         </section>
       </div>

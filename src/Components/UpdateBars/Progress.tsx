@@ -19,52 +19,56 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
   return (
     <div className="p-2">
       <p className="text-xl text-center font-bold">Current Progress</p>
-      <div className="bg-slate-200 p-2 rounded-xl my-2">
+      <div className="bg-slate-200 p-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
           <p className="font-bold text-xl">Calories</p>
           <input
-            className="rounded-lg px-2"
+            className="rounded-lg px-2 text-right"
             type="number"
             id="calorieInput"
+            placeholder="Calorie goal"
             onChange={(e) => setCalGoal(e.target.valueAsNumber)}
             value={calGoal}
           />
         </div>
         <ProgressBar amount={calculateTotal('calories')} goal={calGoal} />
       </div>
-      <div className="bg-slate-200 p-2 rounded-xl my-2">
+      <div className="bg-slate-200 p-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
           <p className="font-bold text-xl">Protein</p>
           <input
             className="rounded-lg px-2"
             type="number"
             id="proteinInput"
+            placeholder="Protein goal"
             onChange={(e) => setProGoal(e.target.valueAsNumber)}
             value={proGoal}
           />
         </div>
         <ProgressBar amount={calculateTotal('protein_g')} goal={proGoal} />
       </div>
-      <div className="bg-slate-200 p-2 rounded-xl my-2">
+      <div className="bg-slate-200 p-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
           <p className="font-bold text-xl">Fats</p>
           <input
             className="rounded-lg px-2"
             type="number"
             id="fatInput"
+            placeholder="Fat goal"
             onChange={(e) => setFatGoal(e.target.valueAsNumber)}
             value={fatGoal}
           />
         </div>
         <ProgressBar amount={calculateTotal('fat_total_g')} goal={fatGoal} />
       </div>
-      <div className="bg-slate-200 p-2 rounded-xl my-2">
+      <div className="bg-slate-200 p-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
           <p className="font-bold text-xl">Carbs</p>
           <input
             className="rounded-lg px-2"
             type="number"
             id="carbInput"
+            placeholder="Carb goal"
             onChange={(e) => setCarGoal(e.target.valueAsNumber)}
             value={carGoal}
           />
