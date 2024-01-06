@@ -38,7 +38,6 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
         protein_g: customProtein,
         fat_total_g: customFats,
         carbohydrates_total_g: customCarbs,
-        id: 'gre',
       });
 
     setShowCustomInput(false);
@@ -96,55 +95,81 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
         }
       >
         <div className="bg-white rounded-2xl p-5">
-          <button className="bg-red-400 " onClick={handleCustomOpen}>
-            X
-          </button>
+          <div className="flex justify-end">
+            <button
+              className="bg-red-400 text-white font-bold text-xl px-2 rounded-md "
+              onClick={handleCustomOpen}
+            >
+              X
+            </button>
+          </div>
           <p className="text-xl font-bold text-center">Custom item</p>
           <div className="flex flex-col">
+            <div className="flex justify-end">
+              <label htmlFor="customItem" className="flex flex-end">
+                Item
+              </label>
+            </div>
             <input
               type="text"
-              id=""
-              className="border-2 rounded-lg my-2 p-1"
-              placeholder="Name"
+              id="customItem"
+              className="border-2 rounded-lg mb-2 p-1"
+              placeholder="Item"
               onChange={(e) => setCustomItem(e.target.value)}
               value={customItem}
             />
+            <div className="flex justify-end">
+              <label htmlFor="customWeight">Weight (g)</label>
+            </div>
             <input
               type="number"
-              id=""
-              className="border-2 rounded-lg my-2 p-1"
+              id="customWeight"
+              className="border-2 rounded-lg mb-2 p-1"
               placeholder="Grams"
               onChange={(e) => setCustomWeight(e.target.valueAsNumber)}
               value={customWeight}
             />
+            <div className="flex justify-end"></div>
+            <div className="flex justify-end">
+              <label htmlFor="customCalories">Calories (Kcal)</label>
+            </div>
             <input
               type="number"
-              id=""
-              className="border-2 rounded-lg my-2 p-1"
+              id="customCalories"
+              className="border-2 rounded-lg mb-2 p-1"
               placeholder="Kcal"
               onChange={(e) => setCustomCalories(e.target.valueAsNumber)}
               value={customCalories}
             />
+            <div className="flex justify-end">
+              <label htmlFor="customProtein">Protein (g)</label>
+            </div>
             <input
               type="number"
-              id=""
-              className="border-2 rounded-lg my-2 p-1"
+              id="customProtein"
+              className="border-2 rounded-lg mb-2 p-1"
               placeholder="Protein"
               onChange={(e) => setCustomProtein(e.target.valueAsNumber)}
               value={customProtein}
             />
+            <div className="flex justify-end">
+              <label htmlFor="customFats">Fats (g)</label>
+            </div>
             <input
               type="number"
-              id=""
-              className="border-2 rounded-lg my-2 p-1"
+              id="customFats"
+              className="border-2 rounded-lg mb-2 p-1"
               placeholder="Fats"
               onChange={(e) => setCustomFats(e.target.valueAsNumber)}
               value={customFats}
             />
+            <div className="flex justify-end">
+              <label htmlFor="customCarbs">Carbs (g)</label>
+            </div>
             <input
               type="number"
-              id=""
-              className="border-2 rounded-lg my-2 p-1"
+              id="customCarbs"
+              className="border-2 rounded-lg mb-2 p-1"
               placeholder="Carbs"
               onChange={(e) => setCustomCarbs(e.target.valueAsNumber)}
               value={customCarbs}

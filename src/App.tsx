@@ -12,7 +12,7 @@ export interface Macros {
   protein_g: number;
   fat_total_g: number;
   carbohydrates_total_g: number;
-  id: string;
+  id?: string;
 }
 
 export interface SearchParams {
