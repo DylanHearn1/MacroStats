@@ -38,6 +38,7 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
         protein_g: customProtein,
         fat_total_g: customFats,
         carbohydrates_total_g: customCarbs,
+        id: '',
       });
 
     setShowCustomInput(false);
