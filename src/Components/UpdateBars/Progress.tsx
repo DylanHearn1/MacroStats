@@ -31,7 +31,11 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
             value={calGoal}
           />
         </div>
-        <ProgressBar amount={calculateTotal('calories')} goal={calGoal} />
+        <ProgressBar
+          amount={calculateTotal('calories')}
+          goal={calGoal}
+          unit="Kcal"
+        />
       </div>
       <div className="bg-slate-200 p-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
@@ -45,7 +49,11 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
             value={proGoal}
           />
         </div>
-        <ProgressBar amount={calculateTotal('protein_g')} goal={proGoal} />
+        <ProgressBar
+          amount={calculateTotal('protein_g')}
+          goal={proGoal}
+          unit="Grams"
+        />
       </div>
       <div className="bg-slate-200 p-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
@@ -59,7 +67,11 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
             value={fatGoal}
           />
         </div>
-        <ProgressBar amount={calculateTotal('fat_total_g')} goal={fatGoal} />
+        <ProgressBar
+          amount={calculateTotal('fat_total_g')}
+          goal={fatGoal}
+          unit="Grams"
+        />
       </div>
       <div className="bg-slate-200 p-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
@@ -76,6 +88,7 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
         <ProgressBar
           amount={calculateTotal('carbohydrates_total_g')}
           goal={carGoal}
+          unit="Grams"
         />
       </div>
     </div>
