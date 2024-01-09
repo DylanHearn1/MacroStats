@@ -3,19 +3,34 @@ import { useState } from 'react';
 interface ProgressProps {
   amount: number;
   goal: number;
+  unit: string;
 }
 
-const ProgressBar = ({ amount, goal }: ProgressProps) => {
+const ProgressBar = ({ amount, goal, unit }: ProgressProps) => {
   const percentage = Math.floor((amount / goal) * 100);
   const progressStyles = 'rounded-full px-2 py-1 text-center text-white';
+  const goalButtonStyle = 'text-white px-2 py-1 rounded-lg';
 
   const [isGoal, setIsGoal] = useState(true);
 
   return (
     <>
-      <div className="flex justify-end">
+      <div className="flex justify-end items-center gap-4">
+        <div>
+          <p>
+            {(isGoal && goal >= amount) || (!isGoal && amount <= goal)
+              ? `${goal - amount} ${unit} Left`
+              : isGoal && amount >= goal
+              ? `Complete!`
+              : !isGoal && amount >= goal && `${amount - goal} ${unit} Over`}
+          </p>
+        </div>
         <button
-          className=""
+          className={
+            isGoal
+              ? `bg-green-400 ${goalButtonStyle}`
+              : `bg-red-400 ${goalButtonStyle}`
+          }
           onClick={() => (isGoal ? setIsGoal(false) : setIsGoal(true))}
         >
           {isGoal ? 'Goal set' : 'Limit set'}
