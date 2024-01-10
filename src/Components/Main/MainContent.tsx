@@ -12,7 +12,7 @@ const MainSection = ({ Items, removeItem }: FoodItems) => {
         Items.map((item) => (
           <div
             key={item.id}
-            className="md:grid md:grid-cols-7 p-3 py-5 bg-white rounded-xl md:rounded-xl my-2 items-center text-center"
+            className="md:grid md:grid-cols-8 p-3 py-5 bg-white rounded-xl md:rounded-xl my-2 items-center text-center"
           >
             <p className="font-bold text-xl">
               {item.name[0].toUpperCase() +
@@ -23,6 +23,7 @@ const MainSection = ({ Items, removeItem }: FoodItems) => {
             <p className="opacity-70">{item.protein_g}g Pro</p>
             <p className="opacity-70">{item.fat_total_g}g Fat</p>
             <p className="opacity-70">{item.carbohydrates_total_g}g Car</p>
+            <p className="opacity-70">{item.sugar_g}g Sugar</p>
             <div>
               <button
                 onClick={() => removeItem(item.id)}

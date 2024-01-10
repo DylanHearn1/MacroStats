@@ -15,6 +15,7 @@ const AddCustomItem = ({ onClick, isOpen, onSubmit }: CustomItemProps) => {
   const [customProtein, setCustomProtein] = useState(0);
   const [customFats, setCustomFats] = useState(0);
   const [customCarbs, setCustomCarbs] = useState(0);
+  const [customSug, setCustomSug] = useState(0);
 
   const handleCustomSubmit = () => {
     customItem &&
@@ -25,6 +26,7 @@ const AddCustomItem = ({ onClick, isOpen, onSubmit }: CustomItemProps) => {
         protein_g: customProtein,
         fat_total_g: customFats,
         carbohydrates_total_g: customCarbs,
+        sugar_g: customSug,
         id: '',
       });
     setCustomItem('');
@@ -86,6 +88,12 @@ const AddCustomItem = ({ onClick, isOpen, onSubmit }: CustomItemProps) => {
               placeholder="Carbs"
               value={customCarbs}
               change={(newValue) => setCustomCarbs(newValue)}
+              inputType="Number"
+            />
+            <CustomInput
+              placeholder="Sugar"
+              value={customCarbs}
+              change={(newValue) => setCustomSug(newValue)}
               inputType="Number"
             />
           </div>

@@ -12,6 +12,7 @@ export interface Macros {
   protein_g: number;
   fat_total_g: number;
   carbohydrates_total_g: number;
+  sugar_g: number;
   id: string;
 }
 
@@ -59,6 +60,7 @@ function App() {
     protein_g,
     fat_total_g,
     carbohydrates_total_g,
+    sugar_g,
   }: Macros) => {
     const customItem = {
       name: name,
@@ -67,6 +69,7 @@ function App() {
       protein_g: protein_g,
       fat_total_g: fat_total_g,
       carbohydrates_total_g: carbohydrates_total_g,
+      sugar_g: sugar_g,
       id: randomKey(),
     };
 
@@ -84,8 +87,12 @@ function App() {
         <div className="flex flex-col overflow-auto col-span-1">
           <AddItem onSubmit={retreiveSearch} onSubmitCustom={addCustomItem} />
           <section className="col-span-2">
-            {items.length > 0 && (
+            {items.length > 0 ? (
               <MainSection Items={items} removeItem={removeItem} />
+            ) : (
+              <div className="flex justify-center items-center h-40">
+                <p className="text-2xl font-bold">Add an item to start</p>
+              </div>
             )}
           </section>
         </div>
