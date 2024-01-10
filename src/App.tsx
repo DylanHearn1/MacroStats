@@ -2,7 +2,7 @@ import './App.scss';
 import { useState } from 'react';
 import MainSection from './Components/Main/MainContent';
 import ProgressUpdate from './Components/UpdateBars/Progress';
-import AddItem from './Components/AddItem';
+import AddItem from './Components/AddItem/AddItem';
 // import Nav from './Components/NavBar/Nav';
 
 export interface Macros {

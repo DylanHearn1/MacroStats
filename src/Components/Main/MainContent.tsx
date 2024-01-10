@@ -18,7 +18,7 @@ const MainSection = ({ Items, removeItem }: FoodItems) => {
               {item.name[0].toUpperCase() +
                 item.name.slice(1, item.name.length)}
             </p>
-            <p className="opacity-70">{item.serving_size_g}g</p>
+            <p className="opacity-70">{item.serving_size_g} Grams</p>
             <p className="opacity-70">{item.calories} Kcal</p>
             <p className="opacity-70">{item.protein_g}g Pro</p>
             <p className="opacity-70">{item.fat_total_g}g Fat</p>
