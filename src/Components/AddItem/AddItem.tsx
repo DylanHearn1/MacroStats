@@ -30,6 +30,7 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
     protein_g,
     fat_total_g,
     carbohydrates_total_g,
+    sugar_g,
   }: Macros) => {
     onSubmitCustom({
       name: name,
@@ -38,6 +39,7 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
       protein_g: protein_g,
       fat_total_g: fat_total_g,
       carbohydrates_total_g: carbohydrates_total_g,
+      sugar_g: sugar_g,
       id: '',
     });
     setShowCustomInput(false);

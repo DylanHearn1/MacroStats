@@ -92,7 +92,7 @@ const AddCustomItem = ({ onClick, isOpen, onSubmit }: CustomItemProps) => {
             />
             <CustomInput
               placeholder="Sugar"
-              value={customCarbs}
+              value={customSug}
               change={(newValue) => setCustomSug(newValue)}
               inputType="Number"
             />
