@@ -9,7 +9,7 @@ interface ProgressProps {
 const ProgressBar = ({ amount, goal, unit }: ProgressProps) => {
   const percentage = Math.floor((amount / goal) * 100);
   const progressStyles = 'rounded-full px-2 py-1 text-center text-white';
-  const goalButtonStyle = 'text-white px-2 py-1 rounded-lg';
+  const goalButtonStyle = 'w-24 rounded-full bg-slate-300 overflow-hidden flex';
 
   const [isGoal, setIsGoal] = useState(true);
 
@@ -25,15 +25,23 @@ const ProgressBar = ({ amount, goal, unit }: ProgressProps) => {
               : !isGoal && amount >= goal && `${amount - goal} ${unit} Over`}
           </p>
         </div>
-        <button
-          className={
-            isGoal
-              ? `bg-green-400 ${goalButtonStyle}`
-              : `bg-red-400 ${goalButtonStyle}`
-          }
-          onClick={() => (isGoal ? setIsGoal(false) : setIsGoal(true))}
-        >
-          {isGoal ? 'Goal set' : 'Limit set'}
+        <button onClick={() => (isGoal ? setIsGoal(false) : setIsGoal(true))}>
+          <div
+            className={
+              isGoal ? `${goalButtonStyle} justify-end` : `${goalButtonStyle}`
+            }
+          >
+            <div
+              style={{ width: '60%' }}
+              className={
+                isGoal
+                  ? 'bg-green-400 rounded-full text-white'
+                  : 'bg-red-400 rounded-full text-white'
+              }
+            >
+              {isGoal ? 'Goal' : 'Limit'}
+            </div>
+          </div>
         </button>
       </div>
       <div className="w-full my-1">

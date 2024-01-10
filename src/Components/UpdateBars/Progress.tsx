@@ -15,11 +15,12 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
   const [proGoal, setProGoal] = useState(150);
   const [fatGoal, setFatGoal] = useState(70);
   const [carGoal, setCarGoal] = useState(600);
+  const [sugGoal, setSugGoal] = useState(30);
 
   return (
-    <div className="p-2">
-      <p className="text-xl text-center font-bold">Current Progress</p>
-      <div className="bg-slate-200 p-2 rounded-xl mb-5">
+    <div className="px-4 flex flex-col justify-around h-full">
+      <p className="text-2xl text-center my-4 font-bold">Current Progress</p>
+      <div className="bg-slate-200 py-4 px-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
           <p className="font-bold text-xl">Calories</p>
           <input
@@ -37,7 +38,7 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
           unit="Kcal"
         />
       </div>
-      <div className="bg-slate-200 p-2 rounded-xl mb-5">
+      <div className="bg-slate-200 py-4 px-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
           <p className="font-bold text-xl">Protein</p>
           <input
@@ -55,7 +56,7 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
           unit="Grams"
         />
       </div>
-      <div className="bg-slate-200 p-2 rounded-xl mb-5">
+      <div className="bg-slate-200 py-4 px-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
           <p className="font-bold text-xl">Fats</p>
           <input
@@ -73,7 +74,7 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
           unit="Grams"
         />
       </div>
-      <div className="bg-slate-200 p-2 rounded-xl mb-5">
+      <div className="bg-slate-200 py-4 px-2 rounded-xl mb-5">
         <div className="flex justify-between my-2">
           <p className="font-bold text-xl">Carbs</p>
           <input
@@ -88,6 +89,24 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
         <ProgressBar
           amount={calculateTotal('carbohydrates_total_g')}
           goal={carGoal}
+          unit="Grams"
+        />
+      </div>
+      <div className="bg-slate-200 py-4 px-2 rounded-xl mb-5">
+        <div className="flex justify-between my-2">
+          <p className="font-bold text-xl">Sugar</p>
+          <input
+            className="rounded-lg px-2 text-right"
+            type="number"
+            id="sugarInput"
+            placeholder="Calorie goal"
+            onChange={(e) => setSugGoal(e.target.valueAsNumber)}
+            value={sugGoal}
+          />
+        </div>
+        <ProgressBar
+          amount={calculateTotal('sugar_g')}
+          goal={sugGoal}
           unit="Grams"
         />
       </div>
