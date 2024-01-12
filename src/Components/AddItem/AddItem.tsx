@@ -47,9 +47,9 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
 
   return (
     <>
-      <div className="flex flex-col md:grid md:grid-cols-4 mb-5 gap-4 m-5">
+      <div className="flex flex-col sm:grid sm:grid-cols-4 mx-4 sm:gap-2 md:gap-4">
         <input
-          className="p-2 rounded-2xl mb-3 lg:mb-0 text-center col-span-4 bg-white-200 outline-none"
+          className="p-2 rounded-2xl text-center sm:col-span-2 md:col-span-4 bg-white-200 outline-none my-2 md:my-0"
           type="text"
           id="foodInput"
           placeholder="Item"
@@ -57,7 +57,7 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
           value={search}
         />
         <input
-          className="p-2 rounded-2xl mb-3 lg:mb-0 text-center"
+          className="p-2 rounded-2xl text-center sm:col-span-2 md:col-span-1 my-2 md:my-0"
           type="number"
           placeholder="Amount"
           id="foodAmountInput"
@@ -66,7 +66,7 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
         />
         <select
           name=""
-          className="p-2 rounded-2xl mb-3 lg:mb-0 text-center"
+          className="p-2 rounded-2xl text-center sm:col-span-2 md:col-span-1 my-2 md:my-0"
           onChange={(e) => setWeightValue(e.target.value)}
           id="unitInput"
         >
@@ -76,12 +76,12 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
         </select>
         <button
           onClick={handleSubmit}
-          className="bg-sky-500 rounded-2xl text-white p-2 mb-5 lg:mb-0 col-span-1 hover:bg-sky-400"
+          className="bg-sky-500 rounded-2xl text-white p-2 col-span-1 hover:bg-sky-400 my-2 md:my-0"
         >
           Add Item
         </button>
         <button
-          className="rounded-2xl p-2 mb-5 lg:mb-0 col-span-1 bg-green-400 text-white"
+          className="rounded-2xl p-2 col-span-1 bg-green-400 text-white my-2 md:my-0"
           onClick={handleCustomOpen}
         >
           Add custom item

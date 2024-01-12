@@ -83,7 +83,7 @@ function App() {
 
   return (
     <>
-      <div className="md:h-screen bg-slate-200 md:grid grid-cols-2">
+      <div className="md:h-screen bg-slate-200 md:grid grid-cols-2 px-3 py-5 gap-3">
         <div className="flex flex-col overflow-auto col-span-1">
           <AddItem onSubmit={retreiveSearch} onSubmitCustom={addCustomItem} />
           <section className="col-span-2">
@@ -96,7 +96,7 @@ function App() {
             )}
           </section>
         </div>
-        <section className="bg-white rounded-3xl m-5 custom-box-shadow col-span-1">
+        <section className="bg-white rounded-3xl custom-box-shadow col-span-1">
           <ProgressUpdate items={items} />
         </section>
       </div>
