@@ -30,7 +30,7 @@ const CustomInput = ({
               : 'border-2 rounded-lg mb-2 p-1'
           }
           placeholder={placeholder}
-          onChange={(e) => change(e.target.value)}
+          onChange={change}
           value={value}
         />
       </div>

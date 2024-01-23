@@ -1,9 +1,8 @@
-import './App.scss';
 import { useState } from 'react';
 import MainSection from './Components/Main/MainContent';
 import ProgressUpdate from './Components/UpdateBars/Progress';
 import AddItem from './Components/AddItem/AddItem';
-// import Nav from './Components/NavBar/Nav';
+import './App.scss';
 
 export interface Macros {
   name: string;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Macros, SearchParams } from '../../App';
-import AddCustomItem from './AddCustomItem';
+import CustomFoodItem from './CustomFoodItem';
 
 interface Search {
   onSubmit: (params: SearchParams) => void;
@@ -66,7 +66,7 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
         />
         <select
           name=""
-          className="p-2 rounded-2xl text-center sm:col-span-2 md:col-span-1 my-2 md:my-0"
+          className="p-2 rounded-2xl text-center sm:col-span-2 md:col-span-1 my-2 md:my-0 bg-white"
           onChange={(e) => setWeightValue(e.target.value)}
           id="unitInput"
         >
@@ -81,17 +81,21 @@ const AddItem = ({ onSubmit, onSubmitCustom }: Search) => {
           Add Item
         </button>
         <button
-          className="rounded-2xl p-2 col-span-1 bg-green-400 text-white my-2 md:my-0"
+          className="rounded-2xl p-2 col-span-1 bg-green-500 hover:bg-green-400 text-white my-2 md:my-0"
           onClick={handleCustomOpen}
         >
           Add custom item
         </button>
       </div>
-      <AddCustomItem
-        onClick={handleCustomOpen}
-        isOpen={showCustomInput}
-        onSubmit={(params) => handleCustomSubmit(params)}
-      />
+      {showCustomInput && (
+        <>
+          <CustomFoodItem
+            onClick={handleCustomOpen}
+            onSubmitSend={(params) => handleCustomSubmit(params)}
+            isOpen={showCustomInput}
+          />
+        </>
+      )}
     </>
   );
 };

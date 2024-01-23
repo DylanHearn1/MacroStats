@@ -35,8 +35,8 @@ const ProgressBar = ({ amount, goal, unit }: ProgressProps) => {
               style={{ width: '60%' }}
               className={
                 isGoal
-                  ? 'bg-green-400 rounded-full text-white'
-                  : 'bg-red-400 rounded-full text-white'
+                  ? 'bg-green-500 rounded-full text-white'
+                  : 'bg-red-500 rounded-full text-white'
               }
             >
               {isGoal ? 'Goal' : 'Limit'}
