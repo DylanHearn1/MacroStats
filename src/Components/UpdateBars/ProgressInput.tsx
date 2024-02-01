@@ -30,7 +30,7 @@ const ProgressInput = ({
         <input
           className="rounded-lg px-2 md:text-right 1/6"
           type="number"
-          id="calorieInput"
+          id={macro}
           placeholder={`${macroDisplayName} (${unit})`}
           onChange={(e) => setTarget(e.target.valueAsNumber)}
           value={target}
