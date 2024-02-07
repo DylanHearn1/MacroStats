@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import MainSection from './Components/Main/MainContent';
-import ProgressUpdate from './Components/UpdateBars/Progress';
+import ProgressUpdate from './Components/UpdateBars/ProgressSection';
 import AddItem from './Components/AddItem/AddItem';
 import './App.scss';
 
@@ -95,7 +95,7 @@ function App() {
             )}
           </section>
         </div>
-        <section className="bg-white rounded-3xl custom-box-shadow col-span-1">
+        <section className="bg-white rounded-3xl shadow-xl col-span-1">
           <ProgressUpdate items={items} />
         </section>
       </div>

@@ -1,5 +1,5 @@
 import { Macros } from '../../App';
-import ProgressInput from './ProgressInput';
+import ProgressGoalInput from './ProgressGoalInput';
 
 interface ProgressProps {
   items: Array<Macros>;
@@ -9,35 +9,35 @@ const ProgressUpdate = ({ items }: ProgressProps) => {
   return (
     <div className="px-4 flex flex-col justify-around h-full">
       <p className="text-2xl text-center my-4 font-bold">Current Progress</p>
-      <ProgressInput
+      <ProgressGoalInput
         macro="calories"
         items={items}
         inputStart={2500}
         macroDisplayName="Calories"
         unit="Kcal"
       />
-      <ProgressInput
+      <ProgressGoalInput
         macro="protein_g"
         items={items}
         inputStart={150}
         macroDisplayName="Protein"
         unit="grams"
       />
-      <ProgressInput
+      <ProgressGoalInput
         macro="fat_total_g"
         items={items}
         inputStart={70}
-        macroDisplayName="Fat"
+        macroDisplayName="Fats"
         unit="grams"
       />
-      <ProgressInput
+      <ProgressGoalInput
         macro="carbohydrates_total_g"
         items={items}
         inputStart={200}
         macroDisplayName="Carbs"
         unit="grams"
       />
-      <ProgressInput
+      <ProgressGoalInput
         macro="sugar_g"
         items={items}
         inputStart={70}

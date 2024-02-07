@@ -12,7 +12,7 @@ const MainSection = ({ Items, removeItem }: FoodItems) => {
         Items.map((item) => (
           <div
             key={item.id}
-            className="2xl:grid 2xl:grid-cols-8 sm:flex sm:justify-evenly md:flex-col p-3 py-5 bg-white rounded-xl my-2 items-center text-center"
+            className="2xl:grid 2xl:grid-cols-8 sm:flex sm:justify-evenly md:flex-col p-3 py-5 bg-white rounded-xl my-2 items-center text-center 2xl:divide-x-2 shadow"
           >
             <p className="font-bold text-xl">
               {item.name[0].toUpperCase() +
