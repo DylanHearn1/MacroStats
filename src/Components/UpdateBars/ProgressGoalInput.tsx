@@ -1,7 +1,7 @@
 import ProgressBar from './ProgressBar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Macros } from '../../App';
-import pencilicon from './../../assets/pencil.png';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 interface ProgressGoalInputProps {
   macroDisplayName: string;
@@ -20,7 +20,7 @@ const ProgressGoalInput = ({
 }: ProgressGoalInputProps) => {
   const [target, setTarget] = useState(inputStart);
   const [showInput, setShowInput] = useState(false);
-  const [goal, setGoal] = useState(true);
+  const [goal, setGoal] = useState(Boolean);
 
   const goalButtonStyle = 'w-24 rounded-full bg-slate-300 overflow-hidden flex';
 
@@ -28,13 +28,31 @@ const ProgressGoalInput = ({
     return Math.floor(items.reduce((acc, cur) => acc + Number(cur[Macro]), 0));
   };
 
+  useEffect(() => {
+    const key = localStorage.getItem(`${macroDisplayName}`);
+    if (key === 'false') {
+      setGoal(false);
+    } else {
+      setGoal(true);
+    }
+  }, []);
+
+  const changeSetGoal = () => {
+    setGoal((prev) => !prev);
+    goal
+      ? localStorage.setItem(`${macroDisplayName}`, 'false')
+      : localStorage.setItem(`${macroDisplayName}`, 'true');
+    console.log(goal);
+  };
+
   return (
     <div className="bg-slate-200 py-4 px-2 rounded-xl mb-5">
       <div className="flex justify-between items-center">
-        <div className="flex">
-          <button onClick={() => setShowInput((prev) => !prev)}>
-            <img src={pencilicon} alt="edit icon" width={'25px'} />
-          </button>
+        <div className="flex space-x-2">
+          <BurgerMenu
+            onclick={() => setShowInput((prev) => !prev)}
+            open={showInput}
+          />
           {showInput && (
             <>
               <input
@@ -66,7 +84,8 @@ const ProgressGoalInput = ({
                   `${calculateTotal(macro) - target} ${unit} Over`)}
           </p>
         </div>
-        <button onClick={() => (goal ? setGoal(false) : setGoal(true))}>
+        {/* <button onClick={() => (goal ? setGoal(false) : setGoal(true))}> */}
+        <button onClick={changeSetGoal}>
           <div
             className={
               goal
