@@ -47,7 +47,7 @@ const AddItem = ({ onSubmit }: Search) => {
         </select>
         <button
           onClick={handleSubmit}
-          className="bg-sky-500 rounded-2xl text-white p-2 col-span-1 hover:bg-sky-400 my-2 md:my-0"
+          className="bg-sky-500 rounded-2xl text-white p-2 col-span-1 hover:bg-sky-600 my-2 md:my-0"
         >
           Add Item
         </button>
