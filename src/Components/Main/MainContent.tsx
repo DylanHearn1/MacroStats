@@ -7,12 +7,12 @@ export interface FoodItems {
 
 const MainSection = ({ Items, removeItem }: FoodItems) => {
   return (
-    <div className="flex flex-col-reverse m-5">
+    <div className="flex flex-col-reverse">
       {Items.length &&
         Items.map((item) => (
           <div
             key={item.id}
-            className="2xl:grid 2xl:grid-cols-8 sm:flex sm:justify-evenly md:flex-col p-3 py-5 bg-white rounded-xl my-2 items-center text-center 2xl:divide-x-2 shadow"
+            className="2xl:grid 2xl:grid-cols-8 md:flex-col p-3 py-5 bg-white rounded-xl my-2 items-center text-center 2xl:divide-x-2 shadow-lg"
           >
             <p className="font-bold text-xl">
               {item.name[0].toUpperCase() +

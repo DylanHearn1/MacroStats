@@ -7,7 +7,10 @@ const BurgerMenu = ({ onclick, open }: BurgerMenuProps) => {
   const barStyle = 'content-none h-1 bg-black rounded-xl transition-all';
 
   return (
-    <div className="flex flex-col justify-between w-8" onClick={onclick}>
+    <div
+      className="flex flex-col justify-between w-8 cursor-pointer"
+      onClick={onclick}
+    >
       <div
         className={open ? `${barStyle} rotate-45 translate-y-2.5` : barStyle}
       ></div>
