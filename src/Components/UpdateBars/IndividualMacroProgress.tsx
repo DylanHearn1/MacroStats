@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Macros } from '../../App';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
-interface ProgressGoalInputProps {
+interface MacroProgressProps {
   macroDisplayName: string;
   macro: keyof Macros;
   items: Array<Macros>;
@@ -11,16 +11,16 @@ interface ProgressGoalInputProps {
   unit: string;
 }
 
-const ProgressGoalInput = ({
+const MacroProgress = ({
   items,
   macro,
   inputStart,
   macroDisplayName,
   unit,
-}: ProgressGoalInputProps) => {
+}: MacroProgressProps) => {
   const [target, setTarget] = useState(inputStart);
   const [showInput, setShowInput] = useState(false);
-  const [goal, setGoal] = useState(Boolean);
+  const [goal, setGoal] = useState(true);
 
   const goalButtonStyle = 'w-24 rounded-full bg-slate-300 overflow-hidden flex';
 
@@ -46,8 +46,8 @@ const ProgressGoalInput = ({
   };
 
   return (
-    <div className="bg-slate-200 py-4 px-2 rounded-xl mb-5">
-      <div className="flex justify-between items-center">
+    <div className="bg-slate-100 py-2 px-2 rounded-xl mb-5 shadow-lg">
+      <div className="flex justify-between">
         <div className="flex space-x-2">
           <BurgerMenu
             onclick={() => setShowInput((prev) => !prev)}
@@ -71,20 +71,6 @@ const ProgressGoalInput = ({
             </>
           )}
         </div>
-        <div className="items-center flex flex-col">
-          <h1 className="text-xl font-bold">{macroDisplayName}</h1>
-          <p>
-            {(goal && target >= calculateTotal(macro)) ||
-            (!goal && calculateTotal(macro) <= target)
-              ? `${target - calculateTotal(macro)} ${unit} Left`
-              : goal && calculateTotal(macro) >= target
-              ? `Complete!`
-              : !target ||
-                (calculateTotal(macro) >= target &&
-                  `${calculateTotal(macro) - target} ${unit} Over`)}
-          </p>
-        </div>
-        {/* <button onClick={() => (goal ? setGoal(false) : setGoal(true))}> */}
         <button onClick={changeSetGoal}>
           <div
             className={
@@ -106,6 +92,20 @@ const ProgressGoalInput = ({
           </div>
         </button>
       </div>
+      <div className="items-center flex flex-col">
+        <h1 className="text-xl font-bold">{macroDisplayName}</h1>
+        <p>
+          {(goal && target >= calculateTotal(macro)) ||
+          (!goal && calculateTotal(macro) <= target)
+            ? `${target - calculateTotal(macro)} ${unit} Left`
+            : goal && calculateTotal(macro) >= target
+            ? `Complete!`
+            : !target ||
+              (calculateTotal(macro) >= target &&
+                `${calculateTotal(macro) - target} ${unit} Over`)}
+        </p>
+      </div>
+      <button onClick={(prev) => setGoal(!prev)} />
       <ProgressBar
         amount={calculateTotal(macro)}
         goal={target}
@@ -115,4 +115,4 @@ const ProgressGoalInput = ({
   );
 };
 
-export default ProgressGoalInput;
+export default MacroProgress;

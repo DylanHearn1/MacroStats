@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import MainSection from './Components/Main/MainContent';
-import ProgressUpdate from './Components/UpdateBars/ProgressSection';
-import AddItem from './Components/AddItem/AddItem';
+import ProgressSection from './Components/UpdateBars/ProgressSection';
+import AddItem from './Components/Header/AddItem';
 import './App.scss';
 
 export interface Macros {
@@ -24,7 +24,7 @@ export interface SearchParams {
 function App() {
   const [items, setItems] = useState<Macros[]>([]);
 
-  async function retreiveSearch({ weight, unit, item }: SearchParams) {
+  async function retrieveSearch({ weight, unit, item }: SearchParams) {
     const URL = `https://api.calorieninjas.com/v1/nutrition?query=${weight} ${unit} ${item}`;
     const options = {
       method: 'GET',
@@ -34,8 +34,8 @@ function App() {
     };
 
     try {
-      const responce = await fetch(URL, options);
-      const results = await responce.json();
+      const response = await fetch(URL, options);
+      const results = await response.json();
       if (results.items.length > 0) {
         const newItem = {
           ...results.items[0],
@@ -52,29 +52,6 @@ function App() {
     return Math.random().toString(36).slice(2, 8);
   };
 
-  const addCustomItem = ({
-    name,
-    serving_size_g,
-    calories,
-    protein_g,
-    fat_total_g,
-    carbohydrates_total_g,
-    sugar_g,
-  }: Macros) => {
-    const customItem = {
-      name: name,
-      serving_size_g: serving_size_g,
-      calories: calories,
-      protein_g: protein_g,
-      fat_total_g: fat_total_g,
-      carbohydrates_total_g: carbohydrates_total_g,
-      sugar_g: sugar_g,
-      id: randomKey(),
-    };
-
-    setItems((prevItems) => [...prevItems, customItem]);
-  };
-
   const removeItem = (id: string) => {
     const filteredItems = items.filter((item) => item.id !== id);
     setItems(filteredItems);
@@ -82,23 +59,23 @@ function App() {
 
   return (
     <>
-      <div className="md:h-screen bg-slate-200 md:grid grid-cols-2 px-3 py-5 gap-3">
-        <div className="flex flex-col overflow-auto col-span-1">
-          <AddItem onSubmit={retreiveSearch} onSubmitCustom={addCustomItem} />
-          <section className="col-span-2">
-            {items.length > 0 ? (
-              <MainSection Items={items} removeItem={removeItem} />
-            ) : (
-              <div className="flex justify-center items-center h-40">
-                <p className="text-2xl font-bold">Add an item to start</p>
-              </div>
-            )}
-          </section>
-        </div>
-        <section className="bg-white rounded-3xl shadow-xl col-span-1">
-          <ProgressUpdate items={items} />
+      <header className="my-5 ">
+        <AddItem onSubmit={retrieveSearch} />
+      </header>
+      <main className="flex flex-col lg:flex-row justify-between w-full gap-5 px-5">
+        <section className="lg:w-4/6">
+          {items.length > 0 ? (
+            <MainSection Items={items} removeItem={removeItem} />
+          ) : (
+            <div className="flex justify-center items-center h-full">
+              <p className="text-2xl font-bold">Add an item to start</p>
+            </div>
+          )}
         </section>
-      </div>
+        <section className="lg:w-2/6">
+          <ProgressSection items={items} />
+        </section>
+      </main>
     </>
   );
 }
