@@ -48,13 +48,14 @@ const MacroProgress = ({
   return (
     <div className="bg-slate-100 py-2 px-2 rounded-xl mb-5 shadow-lg">
       <div className="flex justify-between">
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 items-center">
           <BurgerMenu
             onclick={() => setShowInput((prev) => !prev)}
             open={showInput}
           />
           {showInput && (
             <>
+              <p>Edit</p>
               <input
                 className="rounded-lg px-2 md:text-right w-20"
                 type="number"
@@ -63,11 +64,6 @@ const MacroProgress = ({
                 onChange={(e) => setTarget(e.target.valueAsNumber)}
                 value={target}
               />
-            </>
-          )}
-          {!showInput && (
-            <>
-              <p>{`${target} ${unit}`}</p>
             </>
           )}
         </div>

@@ -59,7 +59,7 @@ function App() {
 
   return (
     <>
-      <header className="my-5 ">
+      <header className="my-5 px-5">
         <AddItem onSubmit={retrieveSearch} />
       </header>
       <main className="flex flex-col lg:flex-row justify-between w-full gap-5 px-5">

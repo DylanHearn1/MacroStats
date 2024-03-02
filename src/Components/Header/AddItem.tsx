@@ -18,9 +18,9 @@ const AddItem = ({ onSubmit }: Search) => {
 
   return (
     <>
-      <div className="bg-slate-100 w-3/4 xl:w-1/2 flex flex-col md:flex-row m-auto rounded lg:rounded-full p-2 shadow-lg justify-between px-3 space-y-4 md:space-y-0">
+      <div className="bg-slate-100 xl:w-1/2 flex flex-col md:flex-row m-auto rounded lg:rounded-full p-2 shadow-lg justify-between px-3 space-y-4 md:space-y-0">
         <input
-          className="w-1/2 border-none relative bg-transparent outline-none"
+          className="border-none relative bg-transparent outline-none"
           type="text"
           id="foodInput"
           placeholder="Item"
@@ -28,7 +28,7 @@ const AddItem = ({ onSubmit }: Search) => {
           value={search}
         />
         <input
-          className="w-25 bg-transparent outline-none appearance-none"
+          className="bg-transparent outline-none appearance-none"
           type="number"
           placeholder="Weight"
           id="foodAmountInput"
@@ -37,7 +37,7 @@ const AddItem = ({ onSubmit }: Search) => {
         />
         <select
           name=""
-          className="w-25 bg-transparent outline-none"
+          className="bg-transparent outline-none"
           onChange={(e) => setWeightValue(e.target.value)}
           id="unitInput"
         >
