@@ -8,7 +8,7 @@ const BurgerMenu = ({ onclick, open }: BurgerMenuProps) => {
 
   return (
     <div
-      className="flex flex-col justify-between h-5 w-6 cursor-pointer"
+      className="flex flex-col justify-between h-5 w-6 cursor-pointer opacity-75"
       onClick={onclick}
     >
       <div
