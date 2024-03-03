@@ -7,7 +7,7 @@ interface ProgressProps {
 
 const ProgressSection = ({ items }: ProgressProps) => {
   return (
-    <div>
+    <div className="space-y-12">
       <MacroProgress
         macro="calories"
         items={items}

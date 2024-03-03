@@ -6,13 +6,13 @@ interface ProgressProps {
 
 const ProgressBar = ({ amount, goal, goalOrLimit }: ProgressProps) => {
   const percentage = Math.floor((amount / goal) * 100);
-  const progressStyles = 'rounded-full px-2 text-center text-white';
+  const progressStyles = 'rounded-full text-center text-white h-full w-full';
 
   return (
     <>
       <div className="flex justify-between items-center"></div>
-      <div className="w-full my-1">
-        <div className="bg-slate-300 rounded-full w-full overflow-hidden">
+      <div className="w-full">
+        <div className="bg-slate-300 rounded-full w-full overflow-hidden h-2">
           <div
             className={
               goalOrLimit && percentage >= 100
@@ -25,10 +25,9 @@ const ProgressBar = ({ amount, goal, goalOrLimit }: ProgressProps) => {
               transition: 'ease 2s',
               maxWidth: '100%',
               width: percentage + '%',
+              ...(percentage > 100 && { width: '100%' }),
             }}
-          >
-            {goal ? percentage + '%' : 0 + '%'}
-          </div>
+          ></div>
         </div>
       </div>
     </>

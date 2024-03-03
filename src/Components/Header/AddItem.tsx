@@ -17,10 +17,10 @@ const AddItem = ({ onSubmit }: Search) => {
   };
 
   return (
-    <>
-      <div className="bg-slate-100 xl:w-1/2 flex flex-col md:flex-row m-auto rounded lg:rounded-full p-2 shadow-lg justify-between px-3 space-y-4 md:space-y-0">
+    <div className="flex justify-center space-x-2">
+      <div className="bg-white flex rounded-full shadow-lg">
         <input
-          className="border-none relative bg-transparent outline-none"
+          className="border-none relative bg-transparent py-3 focus:outline-none focus:ring focus:border-blue-600 rounded-full px-2"
           type="text"
           id="foodInput"
           placeholder="Item"
@@ -28,7 +28,7 @@ const AddItem = ({ onSubmit }: Search) => {
           value={search}
         />
         <input
-          className="bg-transparent outline-none appearance-none"
+          className="bg-transparent outline-none appearance-none py-3 focus:outline-none focus:ring focus:border-blue-600 rounded-full px-2"
           type="number"
           placeholder="Weight"
           id="foodAmountInput"
@@ -37,7 +37,7 @@ const AddItem = ({ onSubmit }: Search) => {
         />
         <select
           name=""
-          className="bg-transparent outline-none"
+          className="bg-transparent outline-none py-3 px-2"
           onChange={(e) => setWeightValue(e.target.value)}
           id="unitInput"
         >
@@ -45,14 +45,14 @@ const AddItem = ({ onSubmit }: Search) => {
           <option value="kilograms">Kilograms</option>
           <option value="lbs">Pounds</option>
         </select>
-        <button
-          onClick={handleSubmit}
-          className="bg-sky-500 rounded-2xl text-white p-2 col-span-1 hover:bg-sky-600 my-2 md:my-0"
-        >
-          Add Item
-        </button>
       </div>
-    </>
+      <button
+        onClick={handleSubmit}
+        className="bg-sky-500 rounded-2xl text-white p-2 col-span-1 hover:bg-sky-600 my-2 md:my-0"
+      >
+        Add Item
+      </button>
+    </div>
   );
 };
 

@@ -14,20 +14,20 @@ const MainSection = ({ Items, removeItem }: FoodItems) => {
             key={item.id}
             className="2xl:grid 2xl:grid-cols-8 md:flex-col p-3 py-5 bg-white rounded-xl my-2 items-center text-center 2xl:divide-x-2 shadow-lg"
           >
-            <p className="font-bold text-xl">
+            <p className="text-xl">
               {item.name[0].toUpperCase() +
                 item.name.slice(1, item.name.length)}
             </p>
-            <p className="opacity-70 my-1 2xl:my-0">
+            <p className="opacity-60 my-1 2xl:my-0">
               {item.serving_size_g} Grams
             </p>
-            <p className="opacity-70 my-1 2xl:my-0">{item.calories} Kcal</p>
-            <p className="opacity-70 my-1 2xl:my-0">{item.protein_g}g Pro</p>
-            <p className="opacity-70 my-1 2xl:my-0">{item.fat_total_g}g Fat</p>
-            <p className="opacity-70 my-1 2xl:my-0">
+            <p className="opacity-60 my-1 2xl:my-0">{item.calories} Kcal</p>
+            <p className="opacity-60 my-1 2xl:my-0">{item.protein_g}g Pro</p>
+            <p className="opacity-60 my-1 2xl:my-0">{item.fat_total_g}g Fat</p>
+            <p className="opacity-60 my-1 2xl:my-0">
               {item.carbohydrates_total_g}g Car
             </p>
-            <p className="opacity-70 my-1 2xl:my-0">{item.sugar_g}g Sugar</p>
+            <p className="opacity-60 my-1 2xl:my-0">{item.sugar_g}g Sugar</p>
             <div>
               <button
                 onClick={() => removeItem(item.id)}

@@ -59,16 +59,16 @@ function App() {
 
   return (
     <>
-      <header className="my-5 px-5">
+      <header className="my-7 px-5">
         <AddItem onSubmit={retrieveSearch} />
       </header>
-      <main className="flex flex-col lg:flex-row justify-between w-full gap-5 px-5">
+      <main className="flex flex-col lg:flex-row justify-between w-full gap-5 px-10">
         <section className="lg:w-4/6">
           {items.length > 0 ? (
             <MainSection Items={items} removeItem={removeItem} />
           ) : (
             <div className="flex justify-center items-center h-full">
-              <p className="text-2xl font-bold">Add an item to start</p>
+              <p className="text-2xl">Add an item to start</p>
             </div>
           )}
         </section>
