@@ -62,7 +62,7 @@ function App() {
       <header className="my-7 px-10">
         <AddItem onSubmit={retrieveSearch} />
       </header>
-      <main className="flex flex-col lg:flex-row justify-between w-full gap-5 px-10">
+      <main className="flex flex-col lg:flex-row justify-between w-full gap-10 px-10">
         <section className="lg:w-4/6">
           {items.length > 0 ? (
             <MainSection Items={items} removeItem={removeItem} />

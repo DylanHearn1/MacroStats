@@ -1,7 +1,8 @@
 import ProgressBar from './ProgressBar';
 import { useEffect, useState } from 'react';
 import { Macros } from '../../App';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import editicon from './../../assets/edit.svg';
+import deleteicon from './../../assets/delete.svg';
 
 interface MacroProgressProps {
   macroDisplayName: string;
@@ -46,105 +47,83 @@ const MacroProgress = ({
   };
 
   return (
-    // <div className="bg-slate-100 py-2 px-2 rounded-xl mb-5 shadow-lg">
-    //   <div className="flex justify-between">
-    //     <div className="flex space-x-2 items-center">
-    //       <BurgerMenu
-    //         onclick={() => setShowInput((prev) => !prev)}
-    //         open={showInput}
-    //       />
-    //       {showInput && (
-    //         <>
-    //           <p>Edit</p>
-    //           <input
-    //             className="rounded-lg px-2 md:text-right w-20"
-    //             type="number"
-    //             id={macro}
-    //             placeholder={`${macroDisplayName} (${unit})`}
-    //             onChange={(e) => setTarget(e.target.valueAsNumber)}
-    //             value={target}
-    //           />
-    //         </>
-    //       )}
-    //     </div>
-    //     <button onClick={changeSetGoal}>
-    //       <div
-    //         className={
-    //           goal
-    //             ? `${goalButtonStyle} justify-end`
-    //             : `${goalButtonStyle} justify-start`
-    //         }
-    //       >
-    //         <div
-    //           style={{ width: '60%' }}
-    //           className={
-    //             goal
-    //               ? 'bg-green-500 rounded-full text-white'
-    //               : 'bg-red-500 rounded-full text-white'
-    //           }
-    //         >
-    //           {goal ? 'Goal' : 'Limit'}
-    //         </div>
-    //       </div>
-    //     </button>
-    //   </div>
-    //   <div className="items-center flex flex-col">
-    //     <h1 className="text-xl font-bold">{macroDisplayName}</h1>
-    //     <p>
-    //       {(goal && target >= calculateTotal(macro)) ||
-    //       (!goal && calculateTotal(macro) <= target)
-    //         ? `${target - calculateTotal(macro)} ${unit} Left`
-    //         : goal && calculateTotal(macro) >= target
-    //         ? `Complete!`
-    //         : !target ||
-    //           (calculateTotal(macro) >= target &&
-    //             `${calculateTotal(macro) - target} ${unit} Over`)}
-    //     </p>
-    //   </div>
-    //   <button onClick={(prev) => setGoal(!prev)} />
-    //   <ProgressBar
-    //     amount={calculateTotal(macro)}
-    //     goal={target}
-    //     goalOrLimit={goal}
-    //   />
-    // </div>
-
     <>
       <div className="progress-shadow py-5 px-5 rounded-xl bg-white hover:scale-110 ease duration-300">
         <div className="flex justify-between mb-5">
           <div className="space-y-2">
             <h1>{macroDisplayName}</h1>
-            <p className="opacity-60">
-              {(goal && target >= calculateTotal(macro)) ||
-              (!goal && calculateTotal(macro) <= target)
-                ? `${target - calculateTotal(macro)} ${unit}`
-                : goal && calculateTotal(macro) >= target
-                ? `Complete!`
-                : !target ||
-                  (calculateTotal(macro) >= target &&
-                    `${calculateTotal(macro) - target} ${unit} over`)}
-            </p>
+            <div className="flex">
+              {showInput ? (
+                <>
+                  <input
+                    className="rounded-lg px-2 md:text-right w-20 bg-slate-100"
+                    type="number"
+                    id={macro}
+                    placeholder={`${macroDisplayName} (${unit})`}
+                    onChange={(e) => setTarget(e.target.valueAsNumber)}
+                    value={target}
+                  />
+                  <button
+                    onClick={() => setShowInput((prev) => !prev)}
+                    className="px-2 py-1"
+                  >
+                    <img
+                      src={deleteicon}
+                      alt="close input"
+                      width={'10px'}
+                      className="opacity-60"
+                    />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p className="opacity-60">
+                    {(goal && target >= calculateTotal(macro)) ||
+                    (!goal && calculateTotal(macro) <= target)
+                      ? `${target - calculateTotal(macro)} ${unit}`
+                      : goal && calculateTotal(macro) >= target
+                      ? `Complete!`
+                      : !target ||
+                        (calculateTotal(macro) >= target &&
+                          `${calculateTotal(macro) - target} ${unit} over`)}
+                  </p>
+                  <button
+                    onClick={() => setShowInput((prev) => !prev)}
+                    className="px-2 py-1"
+                  >
+                    <img
+                      src={editicon}
+                      alt="edit"
+                      width={'15px'}
+                      className="opacity-60"
+                    />
+                  </button>
+                </>
+              )}
+            </div>
           </div>
-          <button onClick={changeSetGoal}>
-            <div
-              className={
-                goal
-                  ? `${goalButtonStyle} justify-end`
-                  : `${goalButtonStyle} justify-start`
-              }
-            >
+          <div className="flex flex-col justify-center items-end space-y-2">
+            <button onClick={changeSetGoal}>
               <div
-                style={{ width: '60%' }}
                 className={
                   goal
-                    ? 'bg-green-500 rounded-full text-white'
-                    : 'bg-red-500 rounded-full text-white'
+                    ? `${goalButtonStyle} justify-end`
+                    : `${goalButtonStyle} justify-start`
                 }
               >
-                {goal ? 'Goal' : 'Limit'}
+                <div
+                  style={{ width: '60%' }}
+                  className={
+                    goal
+                      ? 'bg-green-500 rounded-full text-white'
+                      : 'bg-red-500 rounded-full text-white'
+                  }
+                >
+                  {goal ? 'Goal' : 'Limit'}
+                </div>
               </div>
-            </div>
-          </button>
+            </button>
+          </div>
         </div>
         <ProgressBar
           amount={calculateTotal(macro)}
