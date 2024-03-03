@@ -1,6 +1,6 @@
 # MacroStats
 
-Deployed site: https://macro-stats.vercel.app/
+Deployed site: https://macro.dylanhearn.co.uk/
 
 ## MacroStats is a web app created using React, TS, Tailwind.
 
