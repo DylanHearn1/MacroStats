@@ -22,9 +22,9 @@ const AddItem = ({ onSubmit }: Search) => {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-white flex rounded-full progress-shadow space-x-2 ">
+      <div className="bg-white flex flex-col md:flex-row rounded-xl md:rounded-full progress-shadow p-3 md:p-0 md:space-x-2 w-full md:w-auto">
         <input
-          className="border-none py-3 outline-none focus:outline-none focus:ring focus:border-blue-600 rounded-full px-2"
+          className="border-none py-3 outline-none focus:outline-none focus:ring focus:border-blue-600 rounded-full px-2 md:text-start text-center"
           type="text"
           id="foodInput"
           placeholder="Item"
@@ -32,7 +32,7 @@ const AddItem = ({ onSubmit }: Search) => {
           value={search}
         />
         <input
-          className="bg-transparent outline-none appearance-none py-3 focus:outline-none focus:ring focus:border-blue-600 rounded-full px-2"
+          className="bg-transparent outline-none appearance-none py-3 focus:outline-none focus:ring focus:border-blue-600 rounded-full px-2 md:text-start text-center"
           type="number"
           placeholder="Weight"
           id="foodAmountInput"
@@ -41,7 +41,7 @@ const AddItem = ({ onSubmit }: Search) => {
         />
         <select
           name=""
-          className="bg-transparent outline-none py-3 px-2"
+          className="bg-transparent outline-none py-3 px-2 md:text-start text-center"
           onChange={(e) => setWeightValue(e.target.value)}
           id="unitInput"
         >
