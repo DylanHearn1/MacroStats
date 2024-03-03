@@ -117,12 +117,12 @@ const MacroProgress = ({
             <p className="opacity-60">
               {(goal && target >= calculateTotal(macro)) ||
               (!goal && calculateTotal(macro) <= target)
-                ? `${target - calculateTotal(macro)} ${unit} Left`
+                ? `${target - calculateTotal(macro)} ${unit}`
                 : goal && calculateTotal(macro) >= target
                 ? `Complete!`
                 : !target ||
                   (calculateTotal(macro) >= target &&
-                    `${calculateTotal(macro) - target} ${unit} Over`)}
+                    `${calculateTotal(macro) - target} ${unit} over`)}
             </p>
           </div>
           <button onClick={changeSetGoal}>

@@ -21,7 +21,7 @@ const ProgressSection = ({ items }: ProgressProps) => {
         items={items}
         inputStart={150}
         macroDisplayName="Protein"
-        unit="grams"
+        unit="Grams"
       />
 
       <MacroProgress
@@ -29,21 +29,21 @@ const ProgressSection = ({ items }: ProgressProps) => {
         items={items}
         inputStart={70}
         macroDisplayName="Fats"
-        unit="grams"
+        unit="Grams"
       />
       <MacroProgress
         macro="carbohydrates_total_g"
         items={items}
         inputStart={200}
         macroDisplayName="Carbs"
-        unit="grams"
+        unit="Grams"
       />
       <MacroProgress
         macro="sugar_g"
         items={items}
         inputStart={70}
         macroDisplayName="Sugar"
-        unit="grams"
+        unit="Grams"
       />
     </div>
   );

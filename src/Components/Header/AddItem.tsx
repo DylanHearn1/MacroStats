@@ -11,16 +11,20 @@ const AddItem = ({ onSubmit }: Search) => {
   const [weightValue, setWeightValue] = useState('grams');
 
   const handleSubmit = () => {
-    onSubmit({ weight: amount, unit: weightValue, item: search });
-    setSearch('');
-    setAmount('');
+    if (search) {
+      onSubmit({ weight: amount, unit: weightValue, item: search });
+      setSearch('');
+      setAmount('');
+    } else {
+      alert('Please enter a valid food');
+    }
   };
 
   return (
-    <div className="flex justify-center space-x-2">
-      <div className="bg-white flex rounded-full shadow-lg">
+    <div className="flex justify-center">
+      <div className="bg-white flex rounded-full progress-shadow space-x-2 ">
         <input
-          className="border-none relative bg-transparent py-3 focus:outline-none focus:ring focus:border-blue-600 rounded-full px-2"
+          className="border-none py-3 outline-none focus:outline-none focus:ring focus:border-blue-600 rounded-full px-2"
           type="text"
           id="foodInput"
           placeholder="Item"
@@ -45,13 +49,13 @@ const AddItem = ({ onSubmit }: Search) => {
           <option value="kilograms">Kilograms</option>
           <option value="lbs">Pounds</option>
         </select>
+        <button
+          onClick={handleSubmit}
+          className="bg-sky-500 rounded-full progress-shadow text-white p-2 hover:bg-sky-600 ease duration-300"
+        >
+          Add Item
+        </button>
       </div>
-      <button
-        onClick={handleSubmit}
-        className="bg-sky-500 rounded-2xl text-white p-2 col-span-1 hover:bg-sky-600 my-2 md:my-0"
-      >
-        Add Item
-      </button>
     </div>
   );
 };
