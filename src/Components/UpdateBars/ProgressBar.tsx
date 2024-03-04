@@ -11,7 +11,8 @@ const ProgressBar = ({ amount, goal, goalOrLimit }: ProgressProps) => {
   return (
     <>
       <div className="flex justify-between items-center"></div>
-      <div className="w-full">
+      <div className="w-full text-center">
+        {goal > 0 && <p className="opacity-60">{percentage + '%'}</p>}
         <div className="bg-slate-300 rounded-full w-full overflow-hidden h-2">
           <div
             className={

@@ -49,7 +49,7 @@ const MacroProgress = ({
   return (
     <>
       <div className="progress-shadow py-5 px-5 rounded-xl bg-white hover:scale-110 ease duration-300">
-        <div className="flex justify-between mb-5">
+        <div className="flex justify-between items-center">
           <div className="space-y-2">
             <h1>{macroDisplayName}</h1>
             <div className="flex">
